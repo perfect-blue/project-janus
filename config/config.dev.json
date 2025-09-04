@@ -1,0 +1,28 @@
+{
+    "version":"1",
+    "name": "My API Gateway",
+    "port": 8080,
+    "cache_ttl": "300s",
+    "timeout": "3000ms",
+    "endpoints": [
+        {
+            "endpoint": "/products",
+            "method": "GET",
+            "backend": [
+                {
+                    "url_pattern": "/items",
+                    "host": ["http://localhost:5003", "http://localhost:5004"]
+                },
+                {
+                    "url_pattern": "/stocks",
+                    "host": ["http://localhost:5003"]
+                }
+            ],
+            "query": ["page", "page_size", "keyword"],
+            "query_mapping": {
+                "page_size": "limit",
+                "keyword": "q"
+            }
+        }
+    ]
+}
